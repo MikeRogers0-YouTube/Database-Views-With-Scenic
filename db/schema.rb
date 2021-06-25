@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_031811) do
+ActiveRecord::Schema.define(version: 2021_06_25_015853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,4 +32,12 @@ ActiveRecord::Schema.define(version: 2021_06_23_031811) do
   end
 
   add_foreign_key "comments", "posts"
+
+  create_view "views_all_users_contents", sql_definition: <<-SQL
+      SELECT comments.body
+     FROM comments
+  UNION
+   SELECT posts.body
+     FROM posts;
+  SQL
 end
