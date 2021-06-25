@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_25_015853) do
+ActiveRecord::Schema.define(version: 2021_06_25_024040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,13 +37,17 @@ ActiveRecord::Schema.define(version: 2021_06_25_015853) do
       SELECT concat('Comment', '-', comments.id) AS id,
       comments.body,
       'Comment'::text AS contentable_type,
-      comments.id AS contentable_id
+      comments.id AS contentable_id,
+      comments.created_at,
+      comments.updated_at
      FROM comments
   UNION
    SELECT concat('Post', '-', posts.id) AS id,
       posts.body,
       'Post'::text AS contentable_type,
-      posts.id AS contentable_id
+      posts.id AS contentable_id,
+      posts.created_at,
+      posts.updated_at
      FROM posts;
   SQL
 end
