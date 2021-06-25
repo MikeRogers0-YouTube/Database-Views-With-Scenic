@@ -35,4 +35,4 @@ services:
 
   test:
     <<: *ci-app
-    command: bash -c "./bin/setup && ./bin/rake assets:precompile && ./bin/bundle exec rspec"
+    command: bash -c "./bin/setup && bundle exec rails db:schema:load && ./bin/rake assets:precompile && ./bin/bundle exec rspec"
