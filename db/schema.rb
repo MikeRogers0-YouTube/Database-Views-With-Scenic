@@ -34,10 +34,16 @@ ActiveRecord::Schema.define(version: 2021_06_25_015853) do
   add_foreign_key "comments", "posts"
 
   create_view "views_all_users_contents", sql_definition: <<-SQL
-      SELECT comments.body
+      SELECT concat('Comment', '-', comments.id) AS id,
+      comments.body,
+      'Comment'::text AS contentable_type,
+      comments.id AS contentable_id
      FROM comments
   UNION
-   SELECT posts.body
+   SELECT concat('Post', '-', posts.id) AS id,
+      posts.body,
+      'Post'::text AS contentable_type,
+      posts.id AS contentable_id
      FROM posts;
   SQL
 end
