@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :comment do
-    post { nil }
-    author { "MyString" }
-    body { "MyText" }
+    post
+    author { Faker::Beer.name }
+    body { Faker::Lorem.paragraph(sentence_count: 3) }
   end
 end
